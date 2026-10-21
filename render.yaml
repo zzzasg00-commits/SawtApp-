@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: gmail-telegram-mailbot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    healthCheckPath: /health
+    envVars:
+      - key: SMTP_EMAIL
+        sync: false
+      - key: SMTP_APP_PASSWORD
+        sync: false
+      - key: APP_NAME
+        value: My App
+      - key: APP_API_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: mailbot.sqlite3
